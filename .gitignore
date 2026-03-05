@@ -1,0 +1,129 @@
+# Qwen Code
+.qwen/
+history/
+specs/
+*.prompt.md
+
+# Documentation files (optional)
+CAROUSEL_DOCUMENTATION.md
+DEPLOYMENT_GUIDE.md
+DYNAMIC_PROJECT_DETAIL.md
+FINAL_STATUS.md
+FRONTEND_REFACTOR_SUMMARY.md
+IMPLEMENTATION_COMPLETE.md
+IMPLEMENTATION_STATUS.md
+INSTALL_GUIDE.md
+QUICK_FIXES.md
+RICH_TEXT_EDITOR_GUIDE.md
+RUNNING_STATUS.md
+SETUP_COMPLETE.md
+$null
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+*.lcov
+.nyc_output
+
+# Production builds
+dist/
+build/
+out/
+.next/
+out-tsc/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+ENV/
+env/
+.venv
+env.bak/
+venv.bak/
+*.egg-info/
+.eggs/
+dist/
+build/
+*.manifest
+*.spec
+
+# Alembic
+alembic/versions/__pycache__/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# FastAPI / Uvicorn
+*.pid
+
+# ImageKit / Uploads
+uploads/
+temp/
+tmp/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# OS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/

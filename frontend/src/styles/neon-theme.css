@@ -1,0 +1,124 @@
+/* Neon Theme Configuration - Premium Futuristic */
+
+:root {
+  /* Primary Colors */
+  --neon-blue: #00E5FF;
+  --neon-blue-rgb: 0, 229, 255;
+  --neon-purple: #7B00FF;
+  --neon-purple-rgb: 123, 0, 255;
+  --white: #FFFFFF;
+  --dark: #111111;
+  
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.8);
+  --glass-shadow: rgba(0, 0, 0, 0.08);
+  
+  /* Gradients */
+  --gradient-neon: linear-gradient(135deg, #00E5FF 0%, #7B00FF 100%);
+  --gradient-neon-reverse: linear-gradient(135deg, #7B00FF 0%, #00E5FF 100%);
+  --gradient-hero: linear-gradient(135deg, #FFFFFF 0%, #F8F9FF 50%, #F0F4FF 100%);
+  
+  /* Shadows */
+  --shadow-neon-sm: 0 0 5px rgba(0, 229, 255, 0.3);
+  --shadow-neon-md: 0 0 15px rgba(0, 229, 255, 0.4), 0 0 30px rgba(123, 0, 255, 0.2);
+  --shadow-neon-lg: 0 0 20px rgba(0, 229, 255, 0.5), 0 0 40px rgba(123, 0, 255, 0.3);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 8px 32px rgba(0, 0, 0, 0.12);
+  
+  /* Border Radius */
+  --radius-glass: 16px;
+  --radius-glass-lg: 24px;
+  
+  /* Transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* Animation durations */
+  --animation-fast: 150ms;
+  --animation-normal: 300ms;
+  --animation-slow: 400ms;
+}
+
+/* Glass Card Base Styles */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-glass);
+  box-shadow: var(--shadow-glass);
+  transition: var(--transition-smooth);
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--neon-blue);
+}
+
+/* Neon Button Base */
+.neon-button {
+  background: var(--gradient-neon);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-glass);
+  padding: 14px 32px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-neon-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.neon-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.neon-button:hover::before {
+  left: 100%;
+}
+
+.neon-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-neon-md);
+}
+
+.neon-button:active {
+  transform: translateY(0);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: var(--gradient-neon);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Focus states for accessibility */
+.neon-button:focus-visible,
+.glass-card:focus-visible {
+  outline: 3px solid var(--neon-purple);
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
