@@ -27,7 +27,7 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Configure CORS - Allow ALL origins for development
+# Configure CORS - Allow frontend and production origins
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -39,13 +39,15 @@ app.add_middleware(
         "http://127.0.0.1:3008",
         "http://localhost:8000",
         "http://127.0.0.1:8000",
+        "https://portfolio-abdulrafay.vercel.app",  # Production frontend
+        "https://portfolio-abdulrafay-git-main-abdulrafays-projects.vercel.app",  # Preview deployments
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-print("✅ CORS configured for development")
+print("✅ CORS configured for development and production")
 
 # Include API routers with /api/v1 prefix
 app.include_router(projects_router, prefix="/api/v1")
