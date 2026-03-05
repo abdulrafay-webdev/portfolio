@@ -90,3 +90,13 @@ def root():
 def health_check():
     """Health check endpoint."""
     return {"status": "healthy"}
+
+
+@app.get("/api/v1/init-db")
+def init_database():
+    """Initialize database tables. Call this once after deployment."""
+    try:
+        create_db_and_tables()
+        return {"status": "success", "message": "Database tables created successfully"}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
