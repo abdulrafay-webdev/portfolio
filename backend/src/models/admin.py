@@ -13,15 +13,19 @@ from src.utils.security import get_password_hash, verify_password
 
 class AdminUser(BaseModel, table=True):
     """Admin user table in database."""
-    
+
     __tablename__ = "admin_users"
-    
+
     email: str = Field(..., unique=True, index=True)
     password_hash: str = Field(...)
-    
+
     def verify_password(self, plain_password: str) -> bool:
         """Verify a plain password against the hashed password."""
         return verify_password(plain_password, self.password_hash)
+    
+    def set_password(self, plain_password: str) -> None:
+        """Hash and set the password."""
+        self.password_hash = get_password_hash(plain_password)
 
 
 class AdminUserCreate(SQLModel):

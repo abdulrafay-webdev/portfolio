@@ -25,32 +25,38 @@ security = HTTPBearer()
 def setup_admin(session: Session = Depends(get_session)):
     """
     Setup initial admin user. Call this ONCE after deployment.
-    Default credentials:
-    - Email: abdullrrafay@2005
-    - Password: Rafay@2005
+    Credentials from environment variables or defaults:
+    - ADMIN_EMAIL (default: abdullrrafay@2005)
+    - ADMIN_PASSWORD (default: Rafay@2005)
     """
+    import os
+    
+    # Get credentials from environment or use defaults
+    admin_email = os.getenv("ADMIN_EMAIL", "abdullrrafay@2005")
+    admin_password = os.getenv("ADMIN_PASSWORD", "Rafay@2005")
+    
     # Check if admin already exists
     statement = select(AdminUser)
     existing_admin = session.exec(statement).first()
     
     if existing_admin:
         # Update existing admin password
-        existing_admin.set_password("Rafay@2005")
-        existing_admin.email = "abdullrrafay@2005"
+        existing_admin.set_password(admin_password)
+        existing_admin.email = admin_email
         session.add(existing_admin)
         session.commit()
         
         return {
             "status": "updated",
             "message": "Admin credentials updated successfully!",
-            "email": "abdullrrafay@2005",
-            "password": "Rafay@2005"
+            "email": admin_email,
+            "password": admin_password
         }
     
     # Create new admin
     admin_data = AdminUserCreate(
-        email="abdullrrafay@2005",
-        password="Rafay@2005"
+        email=admin_email,
+        password=admin_password
     )
     
     db_admin = AdminUser.model_validate(admin_data)
@@ -60,8 +66,8 @@ def setup_admin(session: Session = Depends(get_session)):
     return {
         "status": "success",
         "message": "Admin user created successfully!",
-        "email": "abdullrrafay@2005",
-        "password": "Rafay@2005"
+        "email": admin_email,
+        "password": admin_password
     }
 
 
