@@ -4,6 +4,10 @@
     {
       "src": "requirements.txt",
       "use": "@vercel/python"
+    },
+    {
+      "src": "src/main.py",
+      "use": "@vercel/python"
     }
   ],
   "routes": [
