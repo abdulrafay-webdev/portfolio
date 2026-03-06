@@ -21,6 +21,42 @@ router = APIRouter(prefix="/admin", tags=["Admin"])
 security = HTTPBearer()
 
 
+@router.get("/setup")
+def setup_admin(session: Session = Depends(get_session)):
+    """
+    Setup initial admin user. Call this ONCE after deployment.
+    Default credentials:
+    - Email: abdullrrafay@2005
+    - Password: Rafay@2005
+    """
+    # Check if admin already exists
+    statement = select(AdminUser)
+    existing_admin = session.exec(statement).first()
+    
+    if existing_admin:
+        return {
+            "status": "exists",
+            "message": "Admin user already exists. Login with existing credentials."
+        }
+    
+    # Create new admin
+    admin_data = AdminUserCreate(
+        email="abdullrrafay@2005",
+        password="Rafay@2005"
+    )
+    
+    db_admin = AdminUser.model_validate(admin_data)
+    session.add(db_admin)
+    session.commit()
+    
+    return {
+        "status": "success",
+        "message": "Admin user created successfully!",
+        "email": "abdullrrafay@2005",
+        "password": "Rafay@2005"
+    }
+
+
 def get_current_admin(
     credentials: HTTPAuthorizationCredentials = Depends(security),
     session: Session = Depends(get_session)
