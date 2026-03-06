@@ -9,6 +9,7 @@ import os
 
 from src.database import create_db_and_tables
 from src.api import projects_router, services_router, contact_router, admin_router
+from src.config import settings
 
 
 @asynccontextmanager
