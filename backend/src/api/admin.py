@@ -34,9 +34,17 @@ def setup_admin(session: Session = Depends(get_session)):
     existing_admin = session.exec(statement).first()
     
     if existing_admin:
+        # Update existing admin password
+        existing_admin.set_password("Rafay@2005")
+        existing_admin.email = "abdullrrafay@2005"
+        session.add(existing_admin)
+        session.commit()
+        
         return {
-            "status": "exists",
-            "message": "Admin user already exists. Login with existing credentials."
+            "status": "updated",
+            "message": "Admin credentials updated successfully!",
+            "email": "abdullrrafay@2005",
+            "password": "Rafay@2005"
         }
     
     # Create new admin
