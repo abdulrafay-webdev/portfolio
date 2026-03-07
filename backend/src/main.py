@@ -55,6 +55,12 @@ if frontend_url and frontend_url not in cors_origins:
 # Always allow the known frontend URL
 cors_origins.append("https://portfolio-abdulrafay.vercel.app")
 
+# Add Vercel preview URLs for mobile testing
+cors_origins.extend([
+    "https://portfolio-backend-*.vercel.app",
+    "https://*.vercel.app",
+])
+
 print(f"✅ CORS configured for: {cors_origins}")
 
 # Configure CORS
