@@ -457,6 +457,136 @@ export default function AdminProjectsPage() {
             </div>
           </div>
 
+          {/* Project Meta */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Project Details</h3>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Project Type</label>
+                <input
+                  type="text"
+                  value={formData.project_meta?.project_type || ''}
+                  onChange={(e) => setFormData({ ...formData, project_meta: { ...formData.project_meta, project_type: e.target.value } })}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00E5FF] focus:border-transparent outline-none transition-all"
+                  placeholder="e.g., Full Stack Web Application"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Performance</label>
+                <input
+                  type="text"
+                  value={formData.project_meta?.performance || ''}
+                  onChange={(e) => setFormData({ ...formData, project_meta: { ...formData.project_meta, performance: e.target.value } })}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00E5FF] focus:border-transparent outline-none transition-all"
+                  placeholder="e.g., Optimized for speed & SEO"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Responsive</label>
+                <input
+                  type="text"
+                  value={formData.project_meta?.responsive || ''}
+                  onChange={(e) => setFormData({ ...formData, project_meta: { ...formData.project_meta, responsive: e.target.value } })}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00E5FF] focus:border-transparent outline-none transition-all"
+                  placeholder="e.g., Mobile, Tablet & Desktop"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Security</label>
+                <input
+                  type="text"
+                  value={formData.project_meta?.security || ''}
+                  onChange={(e) => setFormData({ ...formData, project_meta: { ...formData.project_meta, security: e.target.value } })}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00E5FF] focus:border-transparent outline-none transition-all"
+                  placeholder="e.g., Production-ready security"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Challenges & Solutions */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Challenges & Solutions</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Challenge Title</label>
+                <input
+                  type="text"
+                  value={formData.challenges?.challenge_title || ''}
+                  onChange={(e) => setFormData({ ...formData, challenges: { ...formData.challenges, challenge_title: e.target.value } })}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00E5FF] focus:border-transparent outline-none transition-all"
+                  placeholder="e.g., Scalable Architecture"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Challenge Description</label>
+                <textarea
+                  value={formData.challenges?.challenge_description || ''}
+                  onChange={(e) => setFormData({ ...formData, challenges: { ...formData.challenges, challenge_description: e.target.value } })}
+                  rows={3}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00E5FF] focus:border-transparent outline-none transition-all resize-none"
+                  placeholder="Describe the main challenge"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Solution Title</label>
+                <input
+                  type="text"
+                  value={formData.challenges?.solution_title || ''}
+                  onChange={(e) => setFormData({ ...formData, challenges: { ...formData.challenges, solution_title: e.target.value } })}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00E5FF] focus:border-transparent outline-none transition-all"
+                  placeholder="e.g., Modern Tech Stack"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Solution Description</label>
+                <textarea
+                  value={formData.challenges?.solution_description || ''}
+                  onChange={(e) => setFormData({ ...formData, challenges: { ...formData.challenges, solution_description: e.target.value } })}
+                  rows={3}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00E5FF] focus:border-transparent outline-none transition-all resize-none"
+                  placeholder="Describe the solution"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Key Features */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Key Features</h3>
+            <div className="space-y-4">
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={featureInput}
+                  onChange={(e) => setFeatureInput(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addFeature())}
+                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00E5FF] focus:border-transparent outline-none transition-all"
+                  placeholder="Add a key feature"
+                />
+                <button
+                  type="button"
+                  onClick={addFeature}
+                  className="px-6 py-3 bg-[#00E5FF] text-black font-semibold rounded-lg hover:bg-[#00E5FF]/90 transition-colors"
+                >
+                  Add
+                </button>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {formData.key_features?.map((feature, i) => (
+                  <span key={i} className="px-3 py-1.5 bg-[#7B00FF]/10 text-[#7B00FF] rounded-lg text-sm font-medium flex items-center gap-2">
+                    {feature}
+                    <button type="button" onClick={() => removeFeature(i)} className="hover:text-red-500 transition-colors">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {/* Submit */}
           <div className="flex gap-4">
             <button

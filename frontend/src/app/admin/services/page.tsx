@@ -333,9 +333,22 @@ export default function AdminServicesPage() {
             </div>
           </div>
 
-          {/* Features */}
+          {/* Featured */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Features</h3>
+            <label className="flex items-center gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={formData.featured}
+                onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
+                className="w-5 h-5 text-[#00E5FF] rounded focus:ring-[#00E5FF]"
+              />
+              <span className="text-sm font-medium text-gray-700">Featured Service</span>
+            </label>
+          </div>
+
+          {/* Features List */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">What's Included</h3>
             <div className="space-y-4">
               <div className="flex gap-2">
                 <input
@@ -344,7 +357,7 @@ export default function AdminServicesPage() {
                   onChange={(e) => setFeatureInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addFeature())}
                   className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00E5FF] focus:border-transparent outline-none transition-all"
-                  placeholder="Add a feature"
+                  placeholder="Add a feature (e.g., Responsive Design)"
                 />
                 <button
                   type="button"
