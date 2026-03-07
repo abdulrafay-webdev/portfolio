@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react';
 import { adminApi } from '@/lib/api';
 import { Service } from '@/types';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+const RichTextEditor = dynamic(() => import('@/components/ui/RichTextEditor'), { ssr: false });
 
 export default function AdminServicesPage() {
   const [services, setServices] = useState<Service[]>([]);
@@ -276,14 +279,15 @@ export default function AdminServicesPage() {
               </div>
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-2">Description *</label>
-                <textarea
-                  value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00E5FF] focus:border-transparent outline-none transition-all resize-none"
-                  placeholder="Service description"
-                  required
-                />
+                <div className="border border-gray-300 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-[#00E5FF] focus-within:border-transparent transition-all">
+                  <RichTextEditor
+                    value={formData.description}
+                    onChange={(value) => setFormData({ ...formData, description: value })}
+                    placeholder="Describe your service in detail..."
+                    height="300px"
+                  />
+                </div>
+                <p className="text-xs text-gray-500 mt-2">Maximum 50,000 characters</p>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Pricing</label>

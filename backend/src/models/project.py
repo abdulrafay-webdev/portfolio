@@ -15,13 +15,13 @@ class ProjectBase(SQLModel):
 
 class Project(ProjectBase, table=True):
     """Project table in database."""
-    
+
     __tablename__ = "projects"
-    
+
     id: UUID = Field(default_factory=uuid4, primary_key=True)
     title: str = Field(..., min_length=1, max_length=200)
     slug: str = Field(..., min_length=1, max_length=250, unique=True, index=True)
-    description: str = Field(..., min_length=50, max_length=10000)  # Increased for rich text
+    description: str = Field(..., min_length=50, max_length=50000)  # Increased for rich text
     tech_stack: str = Field(default="")  # Comma-separated string
     featured: bool = Field(default=False, index=True)
     image_url: Optional[str] = Field(default=None, max_length=500)
@@ -39,10 +39,10 @@ class Project(ProjectBase, table=True):
 
 class ProjectCreate(SQLModel):
     """Schema for creating a project."""
-    
+
     title: str = Field(..., min_length=1, max_length=200)
     slug: str = Field(..., min_length=1, max_length=250)
-    description: str = Field(..., min_length=50, max_length=10000)  # Increased for rich text
+    description: str = Field(..., min_length=50, max_length=50000)  # Increased for rich text
     tech_stack: str = Field(default="")
     featured: bool = Field(default=False)
     image_url: Optional[str] = Field(default=None, max_length=500)

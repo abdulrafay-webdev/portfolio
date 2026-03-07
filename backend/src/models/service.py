@@ -16,13 +16,13 @@ class ServiceBase(SQLModel):
 
 class Service(ServiceBase, table=True):
     """Service table in database."""
-    
+
     __tablename__ = "services"
-    
+
     id: UUID = Field(default_factory=uuid4, primary_key=True)
     name: str = Field(..., min_length=3, max_length=100)
     slug: str = Field(..., min_length=1, max_length=250, unique=True, index=True)
-    description: str = Field(..., min_length=20, max_length=10000)  # Increased for rich text
+    description: str = Field(..., min_length=20, max_length=50000)  # Increased for rich text
     pricing: Optional[str] = Field(default=None, max_length=200)
     image_url: Optional[str] = Field(default=None, max_length=500)  # Service image
     featured: bool = Field(default=False, index=True)
@@ -37,10 +37,10 @@ class Service(ServiceBase, table=True):
 
 class ServiceCreate(SQLModel):
     """Schema for creating a service."""
-    
+
     name: str = Field(..., min_length=3, max_length=100)
     slug: str = Field(..., min_length=1, max_length=250)
-    description: str = Field(..., min_length=20, max_length=10000)  # Increased for rich text
+    description: str = Field(..., min_length=20, max_length=50000)  # Increased for rich text
     pricing: Optional[str] = Field(default=None, max_length=200)
     image_url: Optional[str] = Field(default=None, max_length=500)
     featured: bool = Field(default=False)
