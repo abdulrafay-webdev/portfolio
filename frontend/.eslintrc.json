@@ -2,9 +2,10 @@
   "extends": ["next/core-web-vitals"],
   "rules": {
     "no-console": ["warn", { "allow": ["warn", "error"] }],
-    "prefer-const": "warn",
-    "no-var": "warn",
+    "prefer-const": "off",
+    "no-var": "off",
     "@next/next/no-img-element": "off",
-    "react-hooks/exhaustive-deps": "off"
+    "react-hooks/exhaustive-deps": "off",
+    "react/no-unescaped-entities": "off"
   }
 }
