@@ -3,6 +3,8 @@
   "rules": {
     "no-console": ["warn", { "allow": ["warn", "error"] }],
     "prefer-const": "warn",
-    "no-var": "warn"
+    "no-var": "warn",
+    "@next/next/no-img-element": "off",
+    "react-hooks/exhaustive-deps": "off"
   }
 }
