@@ -16,13 +16,13 @@ from src.config import settings
 async def lifespan(app: FastAPI):
     """Application lifespan handler."""
     # Startup: Create database tables
-    print("🔄 Starting up application...")
+    print("Starting up application...")
     try:
         create_db_and_tables()
-        print("✅ Database tables created successfully")
+        print("Database tables created successfully")
     except Exception as e:
-        print(f"⚠️ Database connection warning: {e}")
-        print("⚠️ Make sure DATABASE_URL environment variable is set correctly")
+        print(f"Database connection warning: {e}")
+        print("Make sure DATABASE_URL environment variable is set correctly")
     yield
     # Shutdown: cleanup if needed
 
@@ -61,7 +61,7 @@ cors_origins.extend([
     "https://*.vercel.app",
 ])
 
-print(f"✅ CORS configured for: {cors_origins}")
+print(f"CORS configured for: {cors_origins}")
 
 # Configure CORS
 app.add_middleware(
@@ -78,7 +78,7 @@ app.include_router(services_router, prefix="/api/v1")
 app.include_router(contact_router, prefix="/api/v1")
 app.include_router(admin_router, prefix="/api/v1")
 
-print("✅ API routers registered")
+print("API routers registered")
 
 
 @app.get("/")

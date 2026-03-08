@@ -122,8 +122,6 @@ export interface Contact {
   email: string;
   subject: string;
   message: string;
-  is_read: boolean;
-  status: string; // new, read, replied, archived
   created_at: string;
   updated_at: string;
 }
@@ -135,16 +133,8 @@ export interface ContactCreate {
   message: string;
 }
 
-export interface ContactUpdate {
-  is_read?: boolean;
-  status?: string;
-}
-
 export interface ContactStats {
   total: number;
-  new: number;
-  read: number;
-  unread: number;
 }
 
 // Image types

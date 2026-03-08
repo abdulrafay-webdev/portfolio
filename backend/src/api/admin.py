@@ -13,7 +13,7 @@ from src.models.admin import AdminUser, AdminUserCreate, AdminUserRead, AdminLog
 from src.models.project import Project, ProjectCreate, ProjectUpdate, ProjectRead
 from src.models.service import Service, ServiceCreate, ServiceUpdate, ServiceRead
 from src.models.image import Image, ImageCreate, ImageRead
-from src.models.contact import Contact, ContactUpdate, ContactRead
+from src.models.contact import Contact, ContactRead
 from src.utils.security import create_access_token, verify_password, decode_access_token
 from src.config import settings
 from src.services.imagekit import imagekit_service
@@ -368,35 +368,13 @@ def get_imagekit_upload_params(
 # Contact Management Endpoints
 @router.get("/contacts", response_model=List[ContactRead])
 def admin_get_contacts(
-    status: Optional[str] = None,
     session: Session = Depends(get_session),
     admin: AdminUser = Depends(get_current_admin)
 ):
-    """Get all contact submissions with optional filtering."""
-    statement = select(Contact)
-    if status:
-        statement = statement.where(Contact.status == status)
-    statement = statement.order_by(Contact.created_at.desc())
+    """Get all contact submissions."""
+    statement = select(Contact).order_by(Contact.created_at.desc())
     contacts = session.exec(statement).all()
     return contacts
-
-
-@router.get("/contacts/stats")
-def admin_get_contact_stats(
-    session: Session = Depends(get_session),
-    admin: AdminUser = Depends(get_current_admin)
-):
-    """Get contact submission statistics."""
-    total = session.exec(select(Contact)).all()
-    new_count = session.exec(select(Contact).where(Contact.status == "new")).all()
-    read_count = session.exec(select(Contact).where(Contact.is_read == True)).all()
-    
-    return {
-        "total": len(total),
-        "new": len(new_count),
-        "read": len(read_count),
-        "unread": len(total) - len(read_count)
-    }
 
 
 @router.get("/contacts/{contact_id}", response_model=ContactRead)
@@ -411,39 +389,6 @@ def admin_get_contact(
 
     if not contact:
         raise HTTPException(status_code=404, detail="Contact not found")
-
-    # Mark as read
-    contact.is_read = True
-    if contact.status == "new":
-        contact.status = "read"
-    session.add(contact)
-    session.commit()
-    session.refresh(contact)
-
-    return contact
-
-
-@router.put("/contacts/{contact_id}", response_model=ContactRead)
-def admin_update_contact(
-    contact_id: str,
-    contact_update: ContactUpdate,
-    session: Session = Depends(get_session),
-    admin: AdminUser = Depends(get_current_admin)
-):
-    """Update a contact submission (mark as read, change status, etc.)."""
-    statement = select(Contact).where(Contact.id == contact_id)
-    contact = session.exec(statement).first()
-
-    if not contact:
-        raise HTTPException(status_code=404, detail="Contact not found")
-
-    update_data = contact_update.model_dump(exclude_unset=True)
-    for key, value in update_data.items():
-        setattr(contact, key, value)
-
-    session.add(contact)
-    session.commit()
-    session.refresh(contact)
 
     return contact
 

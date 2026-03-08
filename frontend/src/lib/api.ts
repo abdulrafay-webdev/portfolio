@@ -287,34 +287,10 @@ export const adminApi = {
     }
   },
 
-  getContactStats: async (): Promise<ContactStats> => {
-    try {
-      const token = localStorage.getItem('admin_token');
-      const response = await apiClient.get<ContactStats>('/admin/contacts/stats', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      return response.data;
-    } catch (error) {
-      handleApiError(error as AxiosError<ApiError>);
-    }
-  },
-
   getContact: async (id: string): Promise<Contact> => {
     try {
       const token = localStorage.getItem('admin_token');
       const response = await apiClient.get<Contact>(`/admin/contacts/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      return response.data;
-    } catch (error) {
-      handleApiError(error as AxiosError<ApiError>);
-    }
-  },
-
-  updateContact: async (id: string, update: ContactUpdate): Promise<Contact> => {
-    try {
-      const token = localStorage.getItem('admin_token');
-      const response = await apiClient.put<Contact>(`/admin/contacts/${id}`, update, {
         headers: { Authorization: `Bearer ${token}` },
       });
       return response.data;
