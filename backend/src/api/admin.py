@@ -5,7 +5,7 @@ Admin panel API endpoints for CRUD operations.
 from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlmodel import Session, select
-from typing import List
+from typing import List, Optional
 from datetime import timedelta
 
 from src.database import get_session
