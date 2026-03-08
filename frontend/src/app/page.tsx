@@ -135,10 +135,10 @@ export default function Home() {
       </section>
 
       {/* Featured Projects Section */}
-      <section id="projects" className="py-[30px] md:py-[40px] bg-gradient-to-b from-white to-gray-50">
+      <section id="projects" className="py-[10px] md:py-[20px] bg-gradient-to-b from-white to-gray-50">
         <div className="container-custom">
           <motion.div
-            className="text-center mb-10"
+            className="text-center mb-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -147,7 +147,7 @@ export default function Home() {
             <h2 className="text-4xl sm:text-5xl font-bold mb-4">
               Featured <span className="gradient-text">Projects</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
               A curated selection of my best work
             </p>
           </motion.div>
@@ -173,7 +173,7 @@ export default function Home() {
           )}
 
           <motion.div
-            className="text-center mt-12"
+            className="text-center mt-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -248,10 +248,10 @@ export default function Home() {
       </section>
 
       {/* Featured Services Carousel */}
-      <section id="featured-services" className="py-[30px] md:py-[40px] bg-gradient-to-b from-white to-gray-50">
+      <section id="featured-services" className="py-[10px] md:py-[20px] bg-gradient-to-b from-white to-gray-50">
         <div className="container-custom">
           <motion.div
-            className="text-center mb-10"
+            className="text-center mb-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -260,7 +260,7 @@ export default function Home() {
             <h2 className="text-4xl sm:text-5xl font-bold mb-4">
               Featured <span className="gradient-text">Services</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
               Professional services tailored to your needs
             </p>
           </motion.div>
@@ -286,7 +286,7 @@ export default function Home() {
           )}
 
           <motion.div
-            className="text-center mt-12"
+            className="text-center mt-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
