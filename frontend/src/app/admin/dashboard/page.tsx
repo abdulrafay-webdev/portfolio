@@ -10,6 +10,7 @@ export default function AdminDashboard() {
   const router = useRouter();
   const [projects, setProjects] = useState<Project[]>([]);
   const [services, setServices] = useState<Service[]>([]);
+  const [contactStats, setContactStats] = useState({ total: 0, new: 0, read: 0, unread: 0 });
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState<string | null>(null);
 
@@ -19,12 +20,14 @@ export default function AdminDashboard() {
 
   async function loadData() {
     try {
-      const [projectsData, servicesData] = await Promise.all([
+      const [projectsData, servicesData, contactStatsData] = await Promise.all([
         adminApi.getProjects(),
         adminApi.getServices(),
+        adminApi.getContactStats(),
       ]);
       setProjects(projectsData);
       setServices(servicesData);
+      setContactStats(contactStatsData);
     } catch (error) {
       console.error('Failed to load dashboard data:', error);
     } finally {
@@ -142,19 +145,27 @@ export default function AdminDashboard() {
           <p className="text-sm text-gray-600">Total Services</p>
         </div>
 
-        {/* Quick View */}
-        <div className="bg-gradient-to-br from-[#00E5FF] to-[#7B00FF] rounded-xl p-6 shadow-lg text-white">
-          <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-              </svg>
+        {/* Contact Messages */}
+        <Link href="/admin/contacts">
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer">
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-red-500/20 to-orange-500/20 rounded-xl flex items-center justify-center">
+                <svg className="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div className="text-right">
+                <span className="text-3xl font-bold text-gray-900">{contactStats.total}</span>
+              </div>
             </div>
-            <span className="text-3xl font-bold">✓</span>
+            <div className="flex items-center justify-between">
+              <p className="text-sm text-gray-600">Messages</p>
+              {contactStats.unread > 0 && (
+                <span className="text-xs font-semibold text-red-500">{contactStats.unread} new</span>
+              )}
+            </div>
           </div>
-          <p className="text-sm text-white/90">All Systems Active</p>
-        </div>
+        </Link>
       </div>
 
       {/* Projects Table */}
