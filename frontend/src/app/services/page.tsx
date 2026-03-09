@@ -197,9 +197,10 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
                 </span>
               )}
             </div>
-            <p className="text-gray-600 mb-6 line-clamp-3 flex-1">
-              {service.description}
-            </p>
+            <div 
+              className="text-gray-600 mb-6 line-clamp-3 flex-1 [&>p]:text-gray-600 [&>p]:text-sm [&>strong]:text-gray-900 [&>u]:text-gray-600 [&>em]:text-gray-600 [&>span]:text-gray-600"
+              dangerouslySetInnerHTML={{ __html: service.description }}
+            />
 
             {service.pricing && (
               <div className="mb-6 py-3 px-4 bg-gradient-to-r from-neon-blue/10 to-neon-purple/10 rounded-xl">

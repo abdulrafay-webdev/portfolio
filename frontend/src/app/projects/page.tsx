@@ -156,9 +156,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               )}
             </div>
             
-            <p className="text-gray-600 mb-4 line-clamp-2 flex-1">
-              {project.description}
-            </p>
+            <div 
+              className="text-gray-600 mb-4 line-clamp-2 flex-1 [&>p]:text-gray-600 [&>p]:text-sm [&>strong]:text-gray-900 [&>u]:text-gray-600 [&>em]:text-gray-600 [&>span]:text-gray-600"
+              dangerouslySetInnerHTML={{ __html: project.description }}
+            />
 
             {/* Tech Stack */}
             <div className="flex flex-wrap gap-2 mb-4">
