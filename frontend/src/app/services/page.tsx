@@ -198,7 +198,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
               )}
             </div>
             <div 
-              className="text-gray-600 mb-6 line-clamp-3 flex-1 [&>p]:text-gray-600 [&>p]:text-sm [&>strong]:text-gray-900 [&>u]:text-gray-600 [&>em]:text-gray-600 [&>span]:text-gray-600"
+              className="text-gray-600 mb-6 line-clamp-3 flex-1 text-sm leading-relaxed [&>p]:text-sm [&>p]:leading-relaxed [&>p]:mb-0 [&>strong]:text-gray-900 [&>u]:text-gray-600 [&>em]:text-gray-600 [&>span]:text-gray-600 [&>b]:text-gray-900 [&>i]:text-gray-600"
               dangerouslySetInnerHTML={{ __html: service.description }}
             />
 
