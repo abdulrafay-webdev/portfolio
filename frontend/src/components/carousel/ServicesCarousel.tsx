@@ -280,7 +280,7 @@ function CardInner({ service, isCenter, isMobile }: { service: Service; isCenter
 
                 {/* Description */}
                 <div 
-                  className="text-gray-200 text-sm leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)] line-clamp-2 max-w-[90%]"
+                  className="text-white text-sm leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)] line-clamp-2 max-w-[90%] [&>p]:text-white [&>p]:text-sm [&>p]:leading-relaxed [&>strong]:text-white [&>u]:text-white [&>em]:text-white [&>span]:text-white"
                   dangerouslySetInnerHTML={{ __html: service.description }}
                 />
 
