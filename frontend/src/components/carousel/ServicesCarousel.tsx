@@ -257,17 +257,28 @@ function CardInner({ service, isCenter, isMobile }: { service: Service; isCenter
 
         {isCenter && (
           <>
-            <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+            {/* Gradient Overlay - Subtle dark gradient for text readability */}
+            <div 
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: 'linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.55))',
+                borderRadius: '0.5rem',
+              }}
+            />
+            
             <motion.div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
               <div className="flex items-center gap-2 mb-2">
                 {service.featured && (
                   <span className="px-2 py-0.5 md:px-3 md:py-1 bg-gradient-to-r from-neon-blue to-neon-purple text-white text-xs rounded-full font-semibold">Featured</span>
                 )}
               </div>
-              <h3 className="text-lg md:text-2xl font-bold mb-2 line-clamp-1">{service.name}</h3>
-              <p className="text-gray-200 text-xs md:text-sm line-clamp-2 mb-3">{service.description}</p>
-              {service.pricing && <p className="text-neon-blue font-semibold mb-3 text-xs md:text-sm">{service.pricing}</p>}
-              <motion.button className="px-4 py-1.5 md:px-6 md:py-2 bg-gradient-to-r from-neon-blue to-neon-purple text-white text-xs md:text-sm font-semibold rounded-lg" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <h3 className="text-lg md:text-2xl font-semibold mb-2 line-clamp-1 drop-shadow-md">{service.name}</h3>
+              <div 
+                className="text-gray-100 text-xs md:text-sm mb-3 line-clamp-3 leading-relaxed drop-shadow-sm"
+                dangerouslySetInnerHTML={{ __html: service.description }}
+              />
+              {service.pricing && <p className="text-[#00E5FF] font-semibold mb-3 text-xs md:text-sm drop-shadow-sm">{service.pricing}</p>}
+              <motion.button className="px-4 py-1.5 md:px-6 md:py-2 bg-gradient-to-r from-neon-blue to-neon-purple text-white text-xs md:text-sm font-semibold rounded-lg shadow-lg" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 View Details
               </motion.button>
             </motion.div>
@@ -275,8 +286,8 @@ function CardInner({ service, isCenter, isMobile }: { service: Service; isCenter
         )}
 
         {!isCenter && (
-          <div className="absolute bottom-0 left-0 right-0 p-2 md:p-4 bg-gradient-to-t from-black/50 to-transparent">
-            <h3 className="text-white text-xs md:text-sm font-semibold line-clamp-1">{service.name}</h3>
+          <div className="absolute bottom-0 left-0 right-0 p-2 md:p-4 bg-gradient-to-t from-black/60 via-black/40 to-transparent">
+            <h3 className="text-white text-xs md:text-sm font-semibold line-clamp-1 drop-shadow-md">{service.name}</h3>
           </div>
         )}
       </div>
