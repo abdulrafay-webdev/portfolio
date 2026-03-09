@@ -157,8 +157,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             </div>
             
             <div 
-              className="text-gray-600 mb-4 line-clamp-3 flex-1 text-sm leading-relaxed [&>p]:text-sm [&>p]:leading-relaxed [&>p]:mb-0 [&>strong]:text-gray-900 [&>u]:text-gray-600 [&>em]:text-gray-600 [&>span]:text-gray-600 [&>b]:text-gray-900 [&>i]:text-gray-600"
-              dangerouslySetInnerHTML={{ __html: project.description }}
+              className="text-gray-600 mb-4 flex-1 text-sm leading-relaxed overflow-hidden"
+              style={{
+                display: '-webkit-box',
+                WebkitLineClamp: '4',
+                WebkitBoxOrient: 'vertical',
+              }}
+              dangerouslySetInnerHTML={{ __html: project.description.replace(/<p>/g, '').replace(/<\/p>/g, ' ').replace(/<br\s*\/?>/g, ' ') }}
             />
 
             {/* Tech Stack */}
