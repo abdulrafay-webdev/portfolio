@@ -169,57 +169,75 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="group"
     >
       <Link href={`/services/${service.slug}`} className="block h-full">
-        <GlassCard className="h-full p-0 flex flex-col overflow-hidden" hover={false}>
-          {/* Service Image */}
-          {service.image_url ? (
-            <div className="relative w-full h-48 overflow-hidden">
-              <img
-                src={service.image_url}
-                alt={service.name}
-                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-              />
+        {/* Card Container with Gradient Border Glow */}
+        <div className="relative h-full rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+          {/* Animated Gradient Border on Hover */}
+          <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 p-[1px]">
+              <div className="w-full h-full rounded-2xl bg-white" />
             </div>
-          ) : (
-            <div className="w-full h-48 bg-gradient-to-br from-neon-blue/20 to-neon-purple/20 flex items-center justify-center">
-              <span className="text-6xl">⚡</span>
+          </div>
+
+          {/* Featured Badge */}
+          {service.featured && (
+            <div className="absolute top-4 right-4 z-10">
+              <span className="text-xs px-3 py-1 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-medium shadow-lg">
+                Featured
+              </span>
             </div>
           )}
 
-          {/* Service Info */}
-          <div className="p-8 flex-1 flex flex-col">
-            <div className="flex items-center gap-2 mb-3">
-              <h3 className="text-2xl font-bold text-gray-900">{service.name}</h3>
-              {service.featured && (
-                <span className="px-2 py-1 bg-gradient-to-r from-neon-blue to-neon-purple text-white text-xs rounded-full font-semibold">
-                  Featured
-                </span>
-              )}
-            </div>
+          {/* Service Image */}
+          <div className="relative h-48 overflow-hidden bg-gray-50">
+            {service.image_url ? (
+              <img
+                src={service.image_url}
+                alt={service.name}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-cyan-100 to-purple-100">
+                <span className="text-6xl">⚡</span>
+              </div>
+            )}
+          </div>
+
+          {/* Content Container */}
+          <div className="p-6 flex flex-col gap-4 flex-1">
+            {/* Title - Always Single Line */}
+            <h3 className="text-xl font-semibold text-gray-900 truncate whitespace-nowrap overflow-hidden text-ellipsis">
+              {service.name}
+            </h3>
+
+            {/* Description - Max 2 Lines */}
             <div
-              className="text-gray-600 mb-6 flex-1 text-sm leading-relaxed overflow-hidden"
+              className="text-sm text-gray-600 leading-relaxed overflow-hidden min-h-[48px]"
               style={{
                 display: '-webkit-box',
-                WebkitLineClamp: '4',
+                WebkitLineClamp: '2',
                 WebkitBoxOrient: 'vertical',
               }}
               dangerouslySetInnerHTML={{ __html: service.description.replace(/<p>/g, '').replace(/<\/p>/g, ' ').replace(/<br\s*\/?>/g, ' ') }}
             />
 
+            {/* Price Section */}
             {service.pricing && (
-              <div className="mb-6 py-3 px-4 bg-gradient-to-r from-neon-blue/10 to-neon-purple/10 rounded-xl">
-                <p className="text-neon-purple font-semibold">{service.pricing}</p>
+              <div className="rounded-xl bg-gradient-to-r from-cyan-100 to-purple-100 py-3 text-center">
+                <p className="text-sm font-semibold text-purple-700">{service.pricing}</p>
               </div>
             )}
 
+            {/* CTA Button */}
             <div className="mt-auto">
-              <NeonButton fullWidth>
+              <button className="w-full rounded-xl py-3 font-medium text-white bg-gradient-to-r from-cyan-500 to-purple-600 hover:opacity-90 transition-opacity">
                 View Details
-              </NeonButton>
+              </button>
             </div>
           </div>
-        </GlassCard>
+        </div>
       </Link>
     </motion.div>
   );
