@@ -173,17 +173,10 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
     >
       <Link href={`/services/${service.slug}`} className="block h-full">
         {/* Card Container with Gradient Border Glow */}
-        <div className="relative h-full rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-          {/* Animated Gradient Border on Hover */}
-          <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 p-[1px]">
-              <div className="w-full h-full rounded-2xl bg-white" />
-            </div>
-          </div>
-
+        <div className="relative h-full rounded-2xl overflow-hidden bg-white border-2 border-transparent shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-cyan-500/50">
           {/* Featured Badge */}
           {service.featured && (
-            <div className="absolute top-4 right-4 z-10">
+            <div className="absolute top-4 right-4 z-40">
               <span className="text-xs px-3 py-1 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-medium shadow-lg">
                 Featured
               </span>
